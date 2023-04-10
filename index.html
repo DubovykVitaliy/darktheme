@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<!-- coloring safari browser in background colors -->
+	<!-- <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ced1d2">
+	<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#273a43"> -->
+	<meta name="supported-color-schemes" content="dark light">
+	<!-- * :root {	color-scheme: light dark;} in CSS do same work -->
+	<script>
+		// if (window.location.protocol === 'http:') {
+		// 	window.location.protocol = 'https:'
+		// }
+		// * these 2 scripts do same work
+		// if (matchMedia('(prefers-color-scheme: dark)').media === 'not all') {
+		// 	document.documentElement.style.display = 'none'
+		// 	document.head.insertAdjacentHTML('beforeend', '<link rel="stylesheet" href="./styles/light.css" onload = "document.documentElement.style.display = ``">')
+		// };
+
+		// If `prefers-color-scheme` is not supported, fall back to light mode.
+		// In this case, light.css will be downloaded with `highest` priority.
+
+		if (!window.matchMedia('(prefers-color-scheme)').matches) {
+			document.documentElement.style.display = 'none'
+			document.head.insertAdjacentHTML(
+				'beforeend',
+				'<link rel="stylesheet" href="/light.css" onload="document.documentElement.style.display = ``">'
+			)
+		}
+
+	</script>
+	<link rel="stylesheet" href="./styles/light.css" media="(prefers-color-scheme: light)">
+	<link rel="stylesheet" href="./styles/dark.css" media="(prefers-color-scheme: dark)">
+	<link rel="stylesheet" href="style.css">
+	<!-- <script src="app.js" defer></script> -->
+</head>
+
+<body>
+	<div class="celestial"></div>
+
+	<fieldset class="switcher" id="switcher">
+		<legend class="switcher__legend">Scheme</legend>
+		<input class="switcher__radio switcher__radio--light" type="radio" name="color-scheme" value="light"
+			aria-label="Light scheme">
+		<input class="switcher__radio switcher__radio--auto" type="radio" name="color-scheme" value="auto" checked
+			aria-label="System scheme">
+		<input class="switcher__radio switcher__radio--dark" type="radio" name="color-scheme" value="dark"
+			aria-label="Dark scheme">
+		<!-- aria-label and legend for screen-readers -->
+		<div class="switcher__status"></div>
+	</fieldset>
+	<script src="app.js"></script>
+</body>
+
+</html>

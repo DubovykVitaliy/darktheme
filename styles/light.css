@@ -1,0 +1,18 @@
+:root {
+	--back-color: #ced1d2;
+	--celestial-color: #fff566;
+	--celestial-shadow: rgb(222 168 33 / 0.4);
+	--celestial-glow: rgb(70 130 180 /0.4);
+}
+.switcher__radio {
+	filter: invert(0);
+}
+.switcher__radio:checked {
+	filter: invert(1);
+}
+.switcher__status {
+	filter: invert(0);
+}
+.switcher__status::after {
+	filter: invert(1);
+}

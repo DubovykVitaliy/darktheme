@@ -1,0 +1,118 @@
+:root {
+	color-scheme: light dark;
+	/* * same we can achieve with
+		* <meta name="supported-color-schemes" content="dark light">
+	*/
+}
+/* 
+:root — селекторе, который в HTML представляет собой элемент <html> и идентичен селектору html, за исключением того, что его специфичность выше.  */
+
+html,
+body {
+	height: 100%;
+}
+body {
+	margin: 0;
+	display: grid;
+	place-content: center;
+	background-color: var(--back-color);
+}
+.celestial {
+	height: 20vmin;
+	width: 20vmin;
+	border-radius: 50%;
+	background-color: var(--celestial-color);
+	background-image: radial-gradient(
+		circle at 20% 20%,
+		var(--celestial-color) 59%,
+		var(--celestial-shadow)
+	);
+	box-shadow: 0 0 10vmin var(--celestial-glow);
+}
+.switcher {
+	box-sizing: content-box;
+	position: absolute;
+	right: 10rem;
+	top: 2rem;
+	margin: 0;
+	border: 0;
+	display: grid;
+	padding: 2px;
+	grid-template-columns: repeat(3, 1fr);
+	z-index: 0;
+	place-items: center;
+}
+.switcher__legend {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+.switcher__radio {
+	--webkit--appearance: none;
+	appearance: none;
+	margin: 0;
+	width: 32px;
+	height: 32px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 24px;
+	transition: filter 0.1s ease-in;
+	position: relative;
+	z-index: 2;
+	/* filter: invert(0); */
+}
+.switcher__radio:focus {
+	outline: none;
+}
+/* .switcher__radio:checked {
+	filter: invert(0);
+} */
+.switcher__radio--light {
+	background-image: url('./icons/sun.svg');
+}
+.switcher__radio--auto {
+	background-image: url('./icons/circle.svg');
+}
+.switcher__radio--dark {
+	background-image: url('./icons/moon.svg');
+}
+.switcher__status {
+	position: absolute;
+	box-sizing: content-box;
+	z-index: -2;
+	inset: 0;
+	border: 3px solid rgb(0 0 0 / 0.2);
+	border-radius: 18px;
+	background-color: rgb(255 255 255 / 0.5);
+}
+.switcher__status::after {
+	content: '';
+	position: absolute;
+	height: 100%;
+	aspect-ratio: 1;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/* background-image: url('./icons/status.svg');
+	background-position: center;
+	background-repeat: no-repeat; */
+	border-radius: 18px;
+	background-color: rgb(255 255 255 / 0.9);
+	transition: all 0.2s ease-in;
+	z-index: -1;
+}
+.switcher__radio:focus-visible ~ .switcher__status::after {
+	border: 2px solid rgb(0 0 0);
+}
+.switcher__radio--light:checked ~ .switcher__status::after {
+	left: 0;
+	transform: translate(0, -50%);
+}
+.switcher__radio--auto:checked ~ .switcher__status::after {
+	transform: translate(-50%, -50%);
+	left: 50%;
+}
+.switcher__radio--dark:checked ~ .switcher__status::after {
+	right: 0;
+	transform: translate(50%, -50%);
+}
